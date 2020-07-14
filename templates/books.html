@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>enter an new search</h2>
-    {% for book in books %}
-    {% endfor %}
-    
 
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}       
+    
+<div class="container">
+  
+  <!-- Conditional rendering. Get an instance for evry record in the DB -->
+  {% for book in books %}
+
+<table class=" striped responsive-table">
+       
+          <tr>
+              <th>Subject Name</th>
+              <th>Book Title</th>
+              <th>Author</th>
+              <th>Description</th>
+              <th>Availability</th>              
+              <th>Name of Lender</th>
+              <th>Due Date</th>
+          </tr>     
+        
+          <tr>
+            <td>{{book.subject_name}}</td>                 
+            <td>{{book.book_title}}</td> 
+             <td>{{book.book_author}}</td>
+             <td>{{book.book_description}}</td>        
+            <td>{{book.is_available}}</td>            
+            <td>{{book.lender_name}}</td>                
+            <td>{{book.due_date}}</td>
+          </tr>       
+      </table>
+      <br><br><br>
+ 
+    <div class="row">     
+      <div class="valign-wrapper col s12">
+        <i class="material-icons">arrow_drop_down</i>
+        <a class="waves-effect waves-light btn">Done</a>
+        <a class="waves-effect waves-light btn orange">Edit</a>
+      </div> 
+      </div> 
+      <br><br>         
+   
+    {% endfor %}
+  
+  </div>
+
+ {% endblock %}
