@@ -2,8 +2,8 @@
 
 {% extends 'base.html' %} {% block content %}
 
-<h4>Add a Book</h4>
-<div class="container-fluid">
+<div class="container">
+<h4>Edit a Submission</h4>
     <div class="row">
         <form action="{{ url_for('insert_book') }}" method="POST" class="col s12">
             <!-- Select menu-->
@@ -14,44 +14,48 @@
                     <select id="faculty" name="faculty_name">
                         <option value="" disabled selected>Choose Faculty</option>
                         {% for fac in faculties %}
-                        <option value="{{fac.faculty_name}}">{{fac.faculty_name}}</option>
+
+                        <!-- set as selected if category name matches the category name associated with task-->
+                            {% if fac.faculty_name == book.faculty_name %}  
+                                <option value="{{fac.faculty_name}}" selected >{{fac.faculty_name}}</option>
+                            {% else %}
+                            <!--If no match, display an option without the selected attribute included-->
+                                <option value="{{fac.faculty_name}}">{{fac.faculty_name}}</option>
+                            {% endif %}
+
                         {% endfor %}
                     </select>
                     <label>Faculty</label>
-                </div> 
+                </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="faculty_name" name="faculty_name" type="text" class="validate" />
+                    <input id="subject_name" name="subject_name" type="text" class="validate"  value="{{book.subject_name}}"/>
                     <label for="icon_prefix">Subject Name</label>
                 </div>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">phone</i>
-                    <textarea name="subject_name" id="subject_name" class="materialize-textarea"></textarea>
-                    <label for="icon_telephone">Book Author</label>
-                </div>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">phone</i>
-                    <textarea name="book_title" id="book_title" class="materialize-textarea"></textarea>
-                    <label for="icon_telephone">Book Author</label>
-                </div>
+                
                 
                 <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <textarea name="book_title" id="book_title" class="materialize-textarea">{{book.book_title}}</textarea>
+                    <label for="icon_prefix">Book Title</label>
+                </div>
+                <div class="input-field col s12">
                     <i class="material-icons prefix">phone</i>
-                    <textarea name="book_author" id="book_author" class="materialize-textarea"></textarea>
+                    <textarea name="book_author" id="book_author" class="materialize-textarea">{{book.book_author}}</textarea>
                     <label for="icon_telephone">Book Author</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">phone</i>
-                    <textarea name="book_description" id="book_description" class="materialize-textarea"></textarea>
+                    <textarea name="book_description" id="book_description" class="materialize-textarea">{{book.book_description}}</textarea>
                     <label for="icon_telephone">Book Description</label>
                 </div>
-            </div>
+            
             <!-- Name of Lender-->
             <div class="input-field col s12">
                 <i class="material-icons prefix">phone</i>
-                <textarea name="lender_name" id="lender_name" class="materialize-textarea"></textarea>
+                <textarea name="lender_name" id="lender_name" class="materialize-textarea">{{book.lender_name}}</textarea>
                 <label for="icon_telephone">Name of Lender</label>
             </div>
             <!-- Date picker-->
@@ -62,12 +66,17 @@
                     <label for="icon_prefix">Return Date </label>
                 </div>
             </div>
+            </div>
 
             <div class="row">
                 <!-- Switch -->
                 <div class="switch">
                     <label>
+                     {% if book.is_available %}  
+                        <input id="is_available" name="is_available" type="checkbox" checked/>
+                        {% else %}
                         <input id="is_available" name="is_available" type="checkbox" />
+                     {% endif %}
                         <span class="lever"></span>
                         Booked
                     </label>
@@ -75,11 +84,22 @@
             </div>
             <!-- <end Book -->
             <div class="row">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Add Book
+                <button class="btn waves-effect waves-light" type="submit" name="action">Edit Book
                     <i class="material-icons right">playlist_add</i>
                 </button>
             </div>
         </form>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+  // local variable
+        newdue_date = Date.parse('{{book.due_date}}');
+        // inject the due date into the form field associated with that date picker.
+        $('#due_date').pickadate('picker').set('select', newdue_date, {format: 'dd/mm/yyyy'}).trigger('change')
+    });
+
+</script>
 {% endblock %}

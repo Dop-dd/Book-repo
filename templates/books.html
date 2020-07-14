@@ -30,15 +30,16 @@
             <td>{{book.due_date}}</td>
           </tr>       
       </table>
-      <br><br><br>
- 
+      <br><br>
+
     <div class="row">     
       <div class="valign-wrapper col s12">
         <i class="material-icons">arrow_drop_down</i>
         <a class="waves-effect waves-light btn">Done</a>
-        <a class="waves-effect waves-light btn orange">Edit</a>
+        <a href="{{url_for('edit_book', book_id=book._id)}}" class="waves-effect waves-light btn orange">Edit</a>
       </div> 
-      </div> 
+      </div>
+      <hr> 
       <br><br>         
    
     {% endfor %}
