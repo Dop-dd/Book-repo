@@ -2,8 +2,9 @@
 
 {% extends 'base.html' %} {% block content %}
 
+<div class="container">
 <h4>Add a Book</h4>
-<div class="container-fluid">
+
     <div class="row">
         <form action="{{ url_for('insert_book') }}" method="POST" class="col s12">
             <!-- Select menu-->
@@ -24,17 +25,17 @@
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
                     <input id="faculty_name" name="faculty_name" type="text" class="validate" />
-                    <label for="icon_prefix">Subject Name</label>
+                    <label for="icon_prefix">Faculty</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">phone</i>
                     <textarea name="subject_name" id="subject_name" class="materialize-textarea"></textarea>
-                    <label for="icon_telephone">Book Author</label>
+                    <label for="icon_telephone">Subject Name</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">phone</i>
                     <textarea name="book_title" id="book_title" class="materialize-textarea"></textarea>
-                    <label for="icon_telephone">Book Author</label>
+                    <label for="icon_telephone">Book Title</label>
                 </div>
                 
                 <div class="input-field col s12">

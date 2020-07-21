@@ -4,12 +4,11 @@
 {% block content %}       
     
 <div class="container">
- 
+    
+
   <!-- Conditional rendering. Get an instance for evry record in the DB -->
-  {% for book in books %}
  <div class="row">
-<table class=" striped responsive-table">
-       
+ <table class=" striped responsive-table">       
           <tr>
               <th>Subject Name</th>
               <th>Book Title</th>
@@ -29,8 +28,9 @@
             <td>{{book.lender_name}}</td>                
             <td>{{book.due_date}}</td>
           </tr>       
-      </table>
-      </div>
+      </table> 
+ </div>
+
       <br><br>
 
     <div class="row">     
@@ -38,14 +38,12 @@
         <i class="material-icons">arrow_drop_down</i>
         <a href="{{url_for('delete_book', book_id=book._id)}}" class="waves-effect waves-light btn">Delete</a><br>
         <a href="{{url_for('edit_book', book_id=book._id)}}" class="waves-effect waves-light btn orange">Edit</a>
-        <a href="{{url_for('find_book', book_id=book._id)}}" class="waves-effect waves-light btn blue">find</a><br>
+        <a href="{{url_for('get_books', book_id=book._id)}}" class="waves-effect waves-light btn blue">find</a><br>
       </div> 
       </div>
       <hr> 
       <br><br>         
-   
-    {% endfor %}
-  
+     
   </div>
 
  {% endblock %}

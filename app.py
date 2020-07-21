@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId 
 
@@ -13,17 +13,15 @@ app.config["MONGO_URI"] = "mongodb+srv://root:rOOtUser@myfirstcluster.ilffs.mong
 mongo = PyMongo(app)
 
 
-# define the various menu options
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+
+# define the various menu options
 @app.route('/get_books')
 def get_books():
     return render_template('books.html', books=mongo.db.books.find())
-
-
-@app.route('/')
-@app.route('/get_media')
-def get_media():
-    return render_template('media.html', media=mongo.db.media.find())
 
 
 # Add a book
@@ -31,21 +29,6 @@ def get_media():
 def add_book():
     return render_template('add_book.html',
                            faculties=mongo.db.faculties.find())
-
-
-# A a Media
-@app.route('/add_media')
-def add_media():
-    return render_template('add_media.html',
-                           media=mongo.db.media.find())
-
-
-# Add submit button for media
-@app.route('/insert_media', methods=['POST'])
-def insert_media():
-    media = mongo.db.media
-    media.insert_one(request.form.to_dict())
-    return redirect(url_for('get_books'))
 
 
 # Add submit button for Books
@@ -72,7 +55,7 @@ def edit_book(book_id):
 @app.route('/update_book/<book_id>', methods=['POST'])
 def update_book(book_id):
     # access the database collection
-    book = mongo.db.book
+    book = mongo.db.books
     # call the update function, specify an id
     book.update({'_id': ObjectId(book_id)},
     {
@@ -85,9 +68,29 @@ def update_book(book_id):
         'due_date': request.form.get('due_date'),
         'is_available': request.form.get('is_urgent')
     })
-
     return redirect(url_for('get_books'))
 # specify the form fields to match the keys on the task collection
+
+
+# delete a book
+@app.route('/delete_book/<book_id>')
+def delete_book(book_id):
+    mongo.db.books.remove({'_id': ObjectId(book_id)})
+    return redirect(url_for('get_books'))
+
+
+# find a book by Id
+@app.route('/find_book/<book_id>', methods=['GET'])
+def find_book(book_id):
+    book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    return render_template('find.html', book=book)
+
+
+# categories function
+@app.route('/get_faculties')
+def get_faculties():
+    return render_template('faculties.html',
+                           faculties=mongo.db.faculties.find())
 
 
 if __name__ == '__main__':

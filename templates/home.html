@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>enter an new search</h2>
-    <h3>1. Add a record</h3>
-    <h3> 2. Find a record by name</h3>
-    <h3> 3. Edit a record</h3>
-    <h3> 4. Delete a record</h3>
-    <h3> 5. Exit</h3>
 
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}       
+ 
+<section>
+<div class="container">
+<div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text">
+                This is a square image. Add the "circle" class to it to make it appear circular.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<br><br>
+<form id="test" class="test" action="/get_one" method="GET">
+  <input type="text" placeholder="book title" id="book_title" name="book_title">
+  <button type="submit"><i class="fa fa-search">Search</i></button>
+</form>
+
+
+<div class="row">
+        <div class="col s12 m6">
+          <div class=" card medium">
+            <div class="card-image">
+              <img src="{{url_for('static', filename='img/book.jpg')}}">
+              <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 m6">
+          <div class=" card medium">
+            <div class="card-image">
+              <img src="{{url_for('static', filename='img/book1.jpg')}}">
+              <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+
+</section>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Card Title</span>
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+             <a href="{{url_for('add_book')}}" class="waves-effect waves-light btn orange">Add Books</a><br><br>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="row">
+
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Card Title</span>
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+             <a href="{{url_for('get_books')}}" class="waves-effect waves-light btn orange">Get Books</a><br><br> 
+              
+            </div>
+          </div>
+        </div>
+      </div>   
+</div>
+</div>
+
+
+
+{% endblock %}

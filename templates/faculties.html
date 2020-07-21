@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% block content %}       
+    
+<div class="container">
+
+<h3>Faculty</h3>
+  
+  <!-- Conditional rendering. Get an instance for evry record in the DB -->
+  {% for Faculty in faculties %}
+
+
+      <br><br>
+
+    <div class="row">     
+      <div class="valign-wrapper col s12">
+        <i class="material-icons">arrow_drop_down</i>
+        <a href="" class="waves-effect waves-light btn">Delete</a><br>
+        <a href="" class="waves-effect waves-light btn orange">Edit</a>
+        <a href="" class="waves-effect waves-light btn blue">Complete</a><br>
+      </div> 
+      </div>
+      <hr> 
+      <br><br>         
+   
+    {% endfor %}
+  
+  </div>
+
+ {% endblock %}
