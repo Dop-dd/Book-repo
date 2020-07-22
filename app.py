@@ -86,6 +86,16 @@ def find_book(book_id):
     return render_template('find.html', book=book)
 
 
+# find a book by using a search field
+@app.route('/get_one/', methods=['GET'])
+def get_one():
+    book_title = mongo.db.books
+    book = mongo.db.books.find_one({'book_title': ''})
+    print(book_title)
+    return render_template('get_one.html',
+                           book=book, book_title=book_title)
+
+
 # categories function
 @app.route('/get_faculties')
 def get_faculties():
