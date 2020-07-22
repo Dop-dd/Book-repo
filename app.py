@@ -80,9 +80,12 @@ def delete_book(book_id):
 
 
 # find a book by Id
-@app.route('/find_book/<book_id>', methods=['GET'])
-def find_book(book_id):
-    book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+@app.route('/find_book/<book_title>/', methods=['GET'])
+def find_book(book_title):
+    book = mongo.db.books.find_one({'_id': ObjectId(book_title)},
+    {
+        'book_title': request.form.get('book_title'),
+    })
     return render_template('find.html', book=book)
 
 
