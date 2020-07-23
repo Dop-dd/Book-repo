@@ -80,7 +80,7 @@ def delete_book(book_id):
 
 
 # find a book by text search
-@app.route('/find_book/<book_title>/', methods=['GET'])
+@app.route('/find_book/<book_title>', methods=['GET'])
 def find_book(book_title):
     book_title = mongo.db.books
     book_title.find_one(
