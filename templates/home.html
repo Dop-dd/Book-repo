@@ -9,7 +9,7 @@
       <!---- Search Box -->
 
 <br><br>
-<form action="/find_book" method="GET">
+<form action="{{ url_for('find_book') }}" method="GET">
   <input type="text" placeholder="Book Title" id="book_title" name="book_title" >
   <button type="submit"><i class="fa fa-search">Search</i></button>
 </form>

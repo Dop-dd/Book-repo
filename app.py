@@ -79,24 +79,15 @@ def delete_book(book_id):
     return redirect(url_for('get_books'))
 
 
-# find a book by Id
+# find a book by text search
 @app.route('/find_book/<book_title>/', methods=['GET'])
 def find_book(book_title):
-    book = mongo.db.books.find_one({'_id': ObjectId(book_title)},
+    book_title = mongo.db.books
+    book_title.find_one(
     {
         'book_title': request.form.get('book_title'),
     })
-    return render_template('find.html', book=book)
-
-
-# find a book by using a search field
-@app.route('/get_one/', methods=['GET'])
-def get_one():
-    book_title = mongo.db.books
-    book = mongo.db.books.find_one({'book_title': ''})
-    print(book_title)
-    return render_template('get_one.html',
-                           book=book, book_title=book_title)
+    return render_template('find.html', book_title=book_title)
 
 
 # categories function
