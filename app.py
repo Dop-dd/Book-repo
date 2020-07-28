@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 # add mongodb name and the uri
 app.config["MONGO_DBNAME"] = 'library_books'
-app.config["MONGO_URI"] = "mongodb+srv://root:rOOtUser@myfirstcluster.ilffs.mongodb.net/library_books?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb+srv://root:<password>@myfirstcluster.ilffs.mongodb.net/library_books?retryWrites=true&w=majority"
 
 # create an instance of py_mongo with app as argument
 mongo = PyMongo(app)
